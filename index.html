@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7fb">
+  <title>Formly — Build forms beautifully</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="logo" href="#" data-page="dashboard"><span class="logo-icon">f.</span><span>formly<span class="logo-dot">.</span></span></a>
+    <div class="workspace"><div class="workspace-avatar">A</div><div><b>Acme Workspace</b><small>Free demo workspace</small></div><span class="chevron">⌄</span></div>
+    <div class="nav-label">WORKSPACE</div>
+    <nav>
+      <a class="nav-link active" href="#" data-page="dashboard"><span>◫</span> Overview</a>
+      <a class="nav-link" href="#" data-page="forms"><span>▤</span> My forms <em id="formCount">0</em></a>
+      <a class="nav-link" href="#" data-page="responses"><span>▣</span> Responses</a>
+    </nav>
+    <div class="nav-label space-top">CREATE</div>
+    <button class="nav-link nav-button" id="sidebarCreate"><span>＋</span> New form</button>
+    <div class="sidebar-bottom"><div class="help-card"><div class="help-icon">✦</div><b>Make something great</b><p>Beautiful forms, made simple. Start with a blank canvas.</p><button id="helpCreate">Create your first form <span>→</span></button></div><div class="profile"><div class="profile-avatar">AD</div><div><b>Aditya Demo</b><small>Workspace owner</small></div><span class="more">•••</span></div></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar"><button class="mobile-menu" id="mobileMenu">☰</button><div class="breadcrumb">Workspace <span>/</span> <b id="crumb">Overview</b></div><div class="top-actions"><span class="demo-pill"><i></i> DEMO MODE</span><button class="icon-btn" title="Notifications">♧</button><div class="top-avatar">AD</div></div></header>
+    <section class="page active" id="dashboardPage">
+      <div class="welcome-row"><div><div class="overline">THURSDAY, NOVEMBER 13, 2026</div><h1>Good evening, Aditya <span class="wave">✦</span></h1><p class="subheading">Here's what's happening in your workspace.</p></div><button class="button primary" id="createTop">＋ Create a form</button></div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-top"><span>Total forms</span><span class="stat-icon purple">▤</span></div><strong id="statForms">0</strong><small><span class="positive">↗</span> Your form library</small></div>
+        <div class="stat-card"><div class="stat-top"><span>Total responses</span><span class="stat-icon blue">▣</span></div><strong id="statResponses">0</strong><small>Across all your forms</small></div>
+        <div class="stat-card"><div class="stat-top"><span>Published forms</span><span class="stat-icon green">↗</span></div><strong id="statPublished">0</strong><small>Ready to collect responses</small></div>
+        <div class="stat-card"><div class="stat-top"><span>Completion rate</span><span class="stat-icon orange">◎</span></div><strong>—</strong><small>Available with live analytics</small></div>
+      </div>
+      <div class="content-grid">
+        <div class="panel recent-panel"><div class="panel-heading"><div><h2>Recent forms</h2><p>Your latest creations in one place.</p></div><button class="text-button" data-page="forms">View all <span>→</span></button></div><div id="recentForms" class="recent-list"></div></div>
+        <div class="panel quick-panel"><div class="panel-heading"><div><h2>Quick start</h2><p>What would you like to create?</p></div></div><button class="quick-action" id="quickBlank"><span class="quick-icon violet">＋</span><span><b>Start from scratch</b><small>Build a form your way</small></span><span class="arrow">→</span></button><button class="quick-action" id="quickEvent"><span class="quick-icon peach">✦</span><span><b>Event registration</b><small>Collect attendee details</small></span><span class="arrow">→</span></button><button class="quick-action" id="quickFeedback"><span class="quick-icon mint">♡</span><span><b>Feedback form</b><small>Hear what people think</small></span><span class="arrow">→</span></button></div>
+      </div>
+      <div class="bottom-banner"><div class="banner-spark">✳</div><div><b>Your next great form starts here.</b><p>Keep things simple. Ask better questions. Get the answers you need.</p></div><button class="button light" id="bannerCreate">Create a form <span>→</span></button><div class="banner-orb"></div></div>
+    </section>
+
+    <section class="page" id="formsPage">
+      <div class="page-heading"><div><div class="overline">YOUR WORKSPACE</div><h1>My forms</h1><p class="subheading">Create, manage and share all your forms.</p></div><button class="button primary" id="formsCreate">＋ Create a form</button></div>
+      <div class="toolbar"><div class="searchbox">⌕ <input id="formSearch" placeholder="Search forms..."></div><select id="formFilter"><option value="all">All forms</option><option value="published">Published</option><option value="draft">Drafts</option></select></div>
+      <div id="allForms" class="forms-grid"></div>
+    </section>
+
+    <section class="page" id="responsesPage">
+      <div class="page-heading"><div><div class="overline">INSIGHTS</div><h1>Responses</h1><p class="subheading">See what people have submitted to your forms.</p></div></div>
+      <div class="panel response-panel"><div class="panel-heading"><div><h2>All submissions</h2><p>Responses submitted in this browser demo.</p></div><button class="button secondary small" id="exportAll">↓ Export CSV</button></div><div id="allResponses"></div></div>
+    </section>
+
+    <section class="page" id="builderPage">
+      <div class="builder-top"><button class="back-button" id="backToForms">← <span>Back</span></button><div class="builder-title"><span class="save-dot"></span><input id="builderTitle" value="Untitled form" aria-label="Form title"></div><div class="builder-actions"><span class="saved-label" id="saveStatus">All changes saved</span><button class="button secondary small" id="previewBtn">◉ Preview</button><button class="button primary small" id="publishBtn">Publish form ↗</button></div></div>
+      <div class="builder-layout">
+        <aside class="builder-tools"><div class="tool-tabs"><button class="tool-tab active" data-tooltab="add">＋ Add fields</button><button class="tool-tab" data-tooltab="design">◈ Design</button></div>
+          <div id="addTools" class="tool-content"><div class="tool-heading">BUILD YOUR FORM</div><p class="tool-hint">Choose a field to add it to your form.</p><div class="field-tool-grid">
+            <button class="field-tool" data-type="text"><span>Ｔ</span>Short text</button><button class="field-tool" data-type="textarea"><span>≡</span>Long text</button>
+            <button class="field-tool" data-type="email"><span>＠</span>Email</button><button class="field-tool" data-type="phone"><span>⌕</span>Phone</button>
+            <button class="field-tool" data-type="number"><span>＃</span>Number</button><button class="field-tool" data-type="date"><span>▦</span>Date</button>
+            <button class="field-tool" data-type="select"><span>⌄</span>Dropdown</button><button class="field-tool" data-type="radio"><span>◉</span>Single choice</button>
+            <button class="field-tool" data-type="checkbox"><span>☑</span>Checkboxes</button><button class="field-tool" data-type="file"><span>↑</span>File upload</button>
+          </div><div class="tool-note"><span>✦</span><div><b>Pro tip</b><p>Keep your forms short and focused. Ask only what you need.</p></div></div></div>
+          <div id="designTools" class="tool-content hidden"><div class="tool-heading">FORM APPEARANCE</div><p class="tool-hint">Make it feel like your brand.</p><label class="setting-label">Accent color</label><div class="color-swatches"><button data-color="#7057e8" style="--swatch:#7057e8" class="selected"></button><button data-color="#246bce" style="--swatch:#246bce"></button><button data-color="#0e8b73" style="--swatch:#0e8b73"></button><button data-color="#d05b4d" style="--swatch:#d05b4d"></button><button data-color="#242b3a" style="--swatch:#242b3a"></button></div><label class="setting-label" for="fontSelect">Typography</label><select id="fontSelect"><option value="DM Sans">DM Sans</option><option value="Manrope">Manrope</option><option value="Arial">Arial</option></select><label class="setting-label" for="layoutSelect">Form layout</label><select id="layoutSelect"><option value="classic">Classic card</option><option value="minimal">Minimal</option></select><div class="tool-note"><span>◈</span><div><b>Live styling</b><p>Your changes appear instantly in the preview.</p></div></div></div>
+        </aside>
+        <div class="builder-canvas-wrap"><div class="canvas-label">FORM CANVAS <span>•</span> EDITING</div><div class="form-canvas" id="formCanvas"><div class="canvas-cover"></div><div class="canvas-inner"><div class="form-brand">YOUR ORGANIZATION</div><input class="canvas-form-title" id="canvasTitle" value="Untitled form"><textarea class="canvas-description" id="canvasDescription" placeholder="Add a short description to tell people what this form is about..."></textarea><div id="fieldList"></div><button class="add-question-inline" id="inlineAdd">＋ Add a question</button><div class="canvas-footer">Powered by <b>formly.</b></div></div></div></div>
+        <aside class="properties"><div class="properties-heading"><b>Field settings</b><span>✧</span></div><div id="propertiesContent" class="properties-content"><div class="empty-properties"><div>✎</div><b>Select a field</b><p>Click any field on the canvas to edit its settings.</p></div></div></aside>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="modal-backdrop hidden" id="createModal"><div class="modal"><button class="modal-close" data-close="createModal">×</button><div class="modal-kicker">LET'S MAKE SOMETHING</div><h2>Create a new form</h2><p>Choose how you'd like to get started.</p><button class="template-choice" data-template="blank"><span class="template-icon violet">＋</span><span><b>Start from scratch</b><small>A blank canvas, ready for your ideas.</small></span><span>→</span></button><button class="template-choice" data-template="event"><span class="template-icon peach">✦</span><span><b>Event registration</b><small>Collect attendee and event details.</small></span><span>→</span></button><button class="template-choice" data-template="feedback"><span class="template-icon mint">♡</span><span><b>Feedback form</b><small>Gather opinions and suggestions.</small></span><span>→</span></button></div></div>
+
+<div class="modal-backdrop hidden" id="previewModal"><div class="preview-modal"><div class="preview-head"><div><span class="preview-live-dot"></span> FORM PREVIEW</div><button class="modal-close" data-close="previewModal">×</button></div><div id="previewContent"></div></div></div>
+<div class="modal-backdrop hidden" id="shareModal"><div class="modal share-modal"><button class="modal-close" data-close="shareModal">×</button><div class="share-check">✓</div><div class="modal-kicker">YOUR FORM IS PUBLISHED</div><h2>Ready to share!</h2><p>Your form is published in this demo. Copy the preview link to test it in this browser.</p><div class="share-url"><span id="shareUrl">formly.demo/f/your-form</span><button id="copyLink">Copy</button></div><div class="share-warning">Demo mode: this link and its responses are stored locally in this browser. It is not yet a live multi-user form.</div><button class="button primary full-button" data-close="shareModal">Done</button></div></div>
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body></html>
